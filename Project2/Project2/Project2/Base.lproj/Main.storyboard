@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LNH-s5-tg2">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Project2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sl-O0-KLy">
+                                <rect key="frame" x="107" y="100" width="200" height="100"/>
+                                <state key="normal" image="germany"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-0P-Zql">
+                                <rect key="frame" x="107" y="230" width="200" height="100"/>
+                                <state key="normal" image="uk"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-2w-Dll">
+                                <rect key="frame" x="107" y="360" width="200" height="100"/>
+                                <state key="normal" image="ireland"/>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="gYe-2w-Dll" firstAttribute="centerX" secondItem="Mep-0P-Zql" secondAttribute="centerX" id="IR5-xZ-Yho"/>
+                            <constraint firstItem="Mep-0P-Zql" firstAttribute="centerX" secondItem="6sl-O0-KLy" secondAttribute="centerX" id="MgW-Cb-QL5"/>
+                            <constraint firstItem="gYe-2w-Dll" firstAttribute="top" secondItem="Mep-0P-Zql" secondAttribute="bottom" constant="30" id="ata-G9-L3C"/>
+                            <constraint firstItem="6sl-O0-KLy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="flJ-18-eaO"/>
+                            <constraint firstItem="Mep-0P-Zql" firstAttribute="top" secondItem="6sl-O0-KLy" secondAttribute="bottom" constant="30" id="hE7-jH-DxU"/>
+                            <constraint firstItem="6sl-O0-KLy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="12" id="m3G-n3-PPC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="mNK-uw-lhv"/>
+                    <connections>
+                        <outlet property="Button1" destination="6sl-O0-KLy" id="pYv-4j-EZt"/>
+                        <outlet property="Button2" destination="Mep-0P-Zql" id="29y-yb-04q"/>
+                        <outlet property="Button3" destination="gYe-2w-Dll" id="X2R-J7-ZM7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="923.1884057971015" y="102.45535714285714"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ZV9-mn-I8l">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="LNH-s5-tg2" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R9N-xc-o9N">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="1Wd-ed-vWK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I1Y-uV-6zv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13.043478260869566" y="102.45535714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="germany" width="200" height="100"/>
+        <image name="ireland" width="200" height="100"/>
+        <image name="uk" width="200" height="100"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
