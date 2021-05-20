@@ -9,7 +9,13 @@ import UIKit
 
 class ViewController: UITableViewController {
     
-    var pictures = [String]() // create an array of all the "nssl" pictures for reference later. pictures array is a property of ViewController which will be created when ViewController screen is created, and exist for as long as the screen exists.
+    // create an array of all the "nssl" pictures for reference later. pictures array is a property of ViewController which will be created when ViewController screen is created, and exist for as long as the screen exists.
+    var pictures = [String]() {
+        didSet {
+            pictures.sort { $0 < $1 }
+        }
+    }
+
     
     override func viewDidLoad() { // override: change Apple's default behaviour from UIViewController
         super.viewDidLoad()
@@ -74,6 +80,7 @@ class ViewController: UITableViewController {
             // 2: success! Set its (DetailViewController's) selectedImage property to be the correct item from the pictures array
                 // Swift thinks instantiateViewController will return back a UIViewController as it's the return type. therefore need to typecast -> "please try to treat this as a DetailViewController, but if it fails then do nothing and move on"
             vc.selectedImage = pictures[indexPath.row]
+            vc.detailTitleBar =  "Picture \(indexPath.row + 1) of \(pictures.count)"
 
             // 3: now push it onto the navigation controller to display it
                 // navigationController? -> view controllers also have an optional navigationController property

@@ -13,10 +13,12 @@ class DetailViewController: UIViewController {
     
     var selectedImage: String? // optional string - might have a value or not. use if let to check that selectedImage has a value, and if so pull out for usage, otherwise do nothing.
     
+    var detailTitleBar: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = selectedImage //dont need to unwrap because both are optional strings.
+        title = detailTitleBar //dont need to unwrap because both are optional strings.
         
         navigationItem.largeTitleDisplayMode = .never //if not by default will inherit the large title from the main screen
 
