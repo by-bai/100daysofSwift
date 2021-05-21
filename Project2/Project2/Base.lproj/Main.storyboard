@@ -16,15 +16,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sl-O0-KLy">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6sl-O0-KLy" userLabel="button1">
                                 <rect key="frame" x="107" y="100" width="200" height="100"/>
                                 <state key="normal" image="germany"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-0P-Zql">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mep-0P-Zql" userLabel="button2">
                                 <rect key="frame" x="107" y="230" width="200" height="100"/>
                                 <state key="normal" image="uk"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-2w-Dll">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-2w-Dll" userLabel="button3">
                                 <rect key="frame" x="107" y="360" width="200" height="100"/>
                                 <state key="normal" image="ireland"/>
                             </button>
@@ -45,6 +45,9 @@
                         <outlet property="Button1" destination="6sl-O0-KLy" id="pYv-4j-EZt"/>
                         <outlet property="Button2" destination="Mep-0P-Zql" id="29y-yb-04q"/>
                         <outlet property="Button3" destination="gYe-2w-Dll" id="X2R-J7-ZM7"/>
+                        <outlet property="button1" destination="6sl-O0-KLy" id="htb-iJ-6rR"/>
+                        <outlet property="button2" destination="Mep-0P-Zql" id="Y3L-Gz-Tj1"/>
+                        <outlet property="button3" destination="gYe-2w-Dll" id="CYE-H6-SL8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
