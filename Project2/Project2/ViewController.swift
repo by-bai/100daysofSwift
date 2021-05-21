@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     @IBOutlet var button3: UIButton!
     
     var countries = [String]() //type inference
+    var correctAnswer = 0
     var score = 0
     
     override func viewDidLoad() {
@@ -49,8 +50,9 @@ class ViewController: UIViewController {
         button2.layer.borderColor = UIColor.lightGray.cgColor
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
-        // UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
+        //UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
         
+        countries.shuffle()
         askQuestion()
     }
     
@@ -62,6 +64,10 @@ class ViewController: UIViewController {
         button1.setImage(UIImage(named: countries[0]), for: .normal)
         button2.setImage(UIImage(named: countries[1]), for: .normal)
         button3.setImage(UIImage(named: countries[2]), for: .normal)
+        
+        // all numeric types Int, Double, CGFloat have a random(in:) method that generates a random number in a range
+        correctAnswer = Int.random(in: 0...2) // between 0 and 2 inclusive
+        title = countries[correctAnswer].uppercased()
         
     }
     
