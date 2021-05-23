@@ -53,11 +53,12 @@ class ViewController: UIViewController {
         //UIColor(red: 1.0, green: 0.6, blue: 0.2, alpha: 1.0).cgColor
         
         countries.shuffle()
+        //askQuestion(action: nil)
         askQuestion()
     }
     
     
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction! = nil) {
         // setImage assigns a UIImage to the button
         // for: describes which state of the button should be changed. specify .normal which means "standard state of the button"
         // .normal is a static property of a struct called UIControlState
@@ -71,6 +72,38 @@ class ViewController: UIViewController {
         
     }
     
-
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        //connected to 3 UIButtons
+        //event used for attachment : TouchUpInside
+        //@IBOutlet = connect code to storyboard layouts
+        //@IBAction = make storyboard layouts trigger code
+        //sender: UIButton is the caller of the method
+        //set identifier Tag for each button. tags 0,1,2 corresponds to flags 0,1,2
+        
+        
+        //1. check whether answer was correct
+        if sender.tag == correctAnswer {
+            title = "Correct"
+            //2. adjust player's score
+            score += 1
+        } else {
+            title = "Wrong"
+            score -= 1
+        }
+        
+        //3. show message telling score
+        let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion)) // 3 possible styles :.default, .cancel, .destructive
+        //handler parameter looks for a closure. must use askQuestion not askQuestion()
+            //askQuestion -> "here's the name of the method to run"
+            //askQuestion() -> "run the askQuestion() method now, and it will tell you the name of the method to run"
+        
+        //alert controller has 2 styles:
+            //.alert -> pops up a message box over the center of the screen. use to tell users about a situation change
+            // .actionSheet -> slides options up from the bottom. use to ask them to choose from a set of options
+        
+        present(ac, animated: true) //view controller to present and whether to animate the presentation
+    }
+    
 }
 
