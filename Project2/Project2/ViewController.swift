@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var countries = [String]() //type inference
     var correctAnswer = 0
     var score = 0
+    var questionNumber = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +69,7 @@ class ViewController: UIViewController {
         
         // all numeric types Int, Double, CGFloat have a random(in:) method that generates a random number in a range
         correctAnswer = Int.random(in: 0...2) // between 0 and 2 inclusive
-        title = countries[correctAnswer].uppercased()
+        title = countries[correctAnswer].uppercased() + " | CURRENT SCORE: \(score)"
         
     }
     
@@ -80,19 +81,31 @@ class ViewController: UIViewController {
         //sender: UIButton is the caller of the method
         //set identifier Tag for each button. tags 0,1,2 corresponds to flags 0,1,2
         
+        var alertMessage = ""
+        questionNumber += 1
         
         //1. check whether answer was correct
         if sender.tag == correctAnswer {
             title = "Correct"
             //2. adjust player's score
+            alertMessage = "Correct! Keep it up!" 
             score += 1
+            
         } else {
             title = "Wrong"
+            alertMessage = "Wrong! That's the flag of \(countries[sender.tag])"
             score -= 1
         }
         
         //3. show message telling score
-        let ac = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
+        
+        
+        
+        if questionNumber == 10 {
+            alertMessage = "End of quiz! Your final score is \(score)"
+        }
+        
+        let ac = UIAlertController(title: title, message: alertMessage, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion)) // 3 possible styles :.default, .cancel, .destructive
         //handler parameter looks for a closure. must use askQuestion not askQuestion()
             //askQuestion -> "here's the name of the method to run"
