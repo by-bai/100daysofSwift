@@ -32,12 +32,14 @@ class ViewController: UIViewController, WKNavigationDelegate { //extends to UIVi
         
         let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil) //target is nil because it can't be tapped
         let refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: webView, action: #selector(webView.reload)) //reload webview. refresh button is aligned to the right because flexible space takes up all the available space on the left
+        let back = UIBarButtonItem(barButtonSystemItem: .rewind, target: webView, action: #selector(webView.goBack))
+        let forward = UIBarButtonItem(barButtonSystemItem: .fastForward, target: webView, action: #selector(webView.goForward))
         
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit() //take up as much space as it needs to show the progressview
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton, spacer, refresh]
+        toolbarItems = [progressButton, spacer, refresh, back, forward]
         navigationController?.isToolbarHidden = false
         
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
@@ -66,6 +68,7 @@ class ViewController: UIViewController, WKNavigationDelegate { //extends to UIVi
         for website in websites {
             ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
         }
+        ac.addAction(UIAlertAction(title: "google.com", style: .default, handler: openPage)) //website not in safe list
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem //impt for ipad
         present(ac, animated: true)
@@ -111,13 +114,23 @@ class ViewController: UIViewController, WKNavigationDelegate { //extends to UIVi
         //evaluate the URL to see whether it's in our safe list, then call the decisionHandler with a negative or positive answer
         if let host = url?.host { //host = website domain like apple.com. if there is a host for this url, pull it out
             for website in websites { //loop through all sites in our safe list
-                if host.contains(website) { //check to see whether each safe website exists somewhere in the host name
+                if (!(host.contains(website))) {
+                    let ac = UIAlertController(title: "This website is blocked", message: nil, preferredStyle: .alert)
+                    ac.addAction(UIAlertAction(title: "Okay", style: .cancel))
+                    present(ac, animated: true)
+                } else {
+                //if host.contains(website) { //check to see whether each safe website exists somewhere in the host name
                     decisionHandler(.allow) //positive
                     return //exit method
                 }
             }
+            
+            
         }
         decisionHandler(.cancel) //no host set -> cancel loading.
+        
+        //issue: alert shows when URL != homepage??
+        
     }
     
     
