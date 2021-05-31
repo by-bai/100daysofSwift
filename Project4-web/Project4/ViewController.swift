@@ -11,6 +11,7 @@ import WebKit
 class ViewController: UIViewController, WKNavigationDelegate { //extends to UIViewController, conforms to WKNavigationDelegate protocol.
     var webView: WKWebView!
     var progressView: UIProgressView!
+    var websites = ["apple.com", "hackingwithswift.com"]
     
     override func loadView() {
         webView = WKWebView()
@@ -55,15 +56,16 @@ class ViewController: UIViewController, WKNavigationDelegate { //extends to UIVi
          after registering an observer, must implement a method called observeValue() which tells you when an observed value has changed.
          */
         
-        let url = URL(string: "https://www.hackingwithswift.com")! //force unwrap url
+        let url = URL(string: "https://" + websites[0])! //force unwrap url
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true //swipe left/right to move backward/forward
     }
     
     @objc func openTapped(){
         let ac = UIAlertController(title: "Open page...", message: nil, preferredStyle: .actionSheet)
-        ac.addAction(UIAlertAction(title: "apple.com", style: .default, handler: openPage))
-        ac.addAction(UIAlertAction(title: "hackingwithswift.com", style: .default, handler: openPage))
+        for website in websites {
+            ac.addAction(UIAlertAction(title: website, style: .default, handler: openPage))
+        }
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem //impt for ipad
         present(ac, animated: true)
@@ -90,6 +92,35 @@ class ViewController: UIViewController, WKNavigationDelegate { //extends to UIVi
             progressView.progress = Float(webView.estimatedProgress)
         }
     }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) { //belongs to the WKNavigationDelegate protocol
+        
+        /*this delegate callback allows us to decide whether we want to allow navigation to happen or not every time something happens
+         
+         *check which part of the page started the navigation
+         *see whether it was triggered by a link being clicked or a form being submitted
+         *check the URL to see whether we like it <<<
+         
+         *pass parameter: decisionHandler -> holds a function/closure? escaping closure (the closure has the potential to escape the current method, and be used at a later date)
+         *method's response: load the page or not
+ 
+        */
+        
+        let url = navigationAction.request.url
+        
+        //evaluate the URL to see whether it's in our safe list, then call the decisionHandler with a negative or positive answer
+        if let host = url?.host { //host = website domain like apple.com. if there is a host for this url, pull it out
+            for website in websites { //loop through all sites in our safe list
+                if host.contains(website) { //check to see whether each safe website exists somewhere in the host name
+                    decisionHandler(.allow) //positive
+                    return //exit method
+                }
+            }
+        }
+        decisionHandler(.cancel) //no host set -> cancel loading.
+    }
+    
+    
 
 }
 
