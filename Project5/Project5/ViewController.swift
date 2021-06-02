@@ -54,8 +54,8 @@ class ViewController: UITableViewController {
         
         let submitAction = UIAlertAction(title: "Submit", style: .default) { //trailing closure syntax
             [weak self, weak ac] _ in //input into the closure; capture weakly
-            guard let answer = ac?.textFields?[0].text else { return } //UITextField
-            self?.submit(answer)
+            guard let answer = ac?.textFields?[0].text else { return } //UITextField -- safely unwrap the array of text fields - it's optional because there might not be any.
+            self?.submit(answer) // pulls out the text from the text field and passes it to submit() method
         }
         
         //giving UIAlertAction some code to execute when it's tapped, and it wants to know that that code accepts a parameter of type UIAlertAction
@@ -71,7 +71,60 @@ class ViewController: UITableViewController {
     }
     
     func submit(_ answer: String) {
+        let lowerAnswer = answer.lowercased()
         
+        let errorTitle: String
+        let errorMessage: String
+        
+        if isPossible(word: lowerAnswer) {
+            if isOriginal(word: lowerAnswer) {
+                if isReal(word: lowerAnswer) {
+                    usedWords.insert(answer, at: 0) //insert into array at position 0 - new entry goes on top
+                    
+                    let indexPath = IndexPath(row: 0, section: 0) // insert a new role in the table view. 0 0 - top of the table
+                    tableView.insertRows(at: [indexPath], with: .automatic) // insertRows() animates the new cell appearing. with parameter -> animation
+                    //IndexPath contains section and row for every item in table
+                    return // exit method
+                } else {
+                    errorTitle = "Word not recognised"
+                    errorMessage = "You can't just make them up, you know!"
+                }
+            } else {
+                errorTitle = "Word already used"
+                errorMessage = "Be more original!"
+            }
+        } else {
+            guard let title = title?.lowercased() else { return }
+            errorTitle = "Word not possible"
+            errorMessage = "You can't spell that word from \(title)."
+        }
+        
+        let ac = UIAlertController(title: errorTitle, message: errorMessage, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+    
+    func isPossible(word: String) -> Bool {
+        guard var tempWord = title?.lowercased() else { return false }
+        for letter in word {
+            if let position = tempWord.firstIndex(of: letter) {
+                tempWord.remove(at: position)
+            } else {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func isOriginal(word: String) -> Bool {
+        return !usedWords.contains(word) //if not inside usedWords array, returns true
+    }
+    
+    func isReal(word: String) -> Bool {
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: word.utf16.count)
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        return misspelledRange.location == NSNotFound
     }
 
 }
