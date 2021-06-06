@@ -64,8 +64,38 @@ class ViewController: UIViewController {
          */
         }
         
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1]-[label2]-[label3]-[label4]-[label5]", options: [], metrics: nil, views: viewsDictionary))
+        // let metrics = ["labelHeight": 88]
+        
+        // view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
+        
         // - is space, 10pts by default, can be customised
+        // constant priority is a value between 1 and 1000. 1000 means "this is absolutely required" and anything less is optional. making priority 999 makes the height optional - so auto layout can find a solution to the layout by shrinking the labels to make them fit. making 88pt optional - auto layout might make them arnd 78 (do its best to make them as close to 88 as possible)
+        
+        /* Anchors
+         
+         widthAnchor, heightAnchor, topAnchor, bottomAnchor, leftAnchor, rightAnchor, leadingAnchor, trailingAnchor, centerXAnchor, and centerYAnchor.
+         
+         Read left to right
+         * left=leading
+         * right=trailing
+         
+         */
+        
+        var previous: UILabel? //first time the loop goes around, there is no previous label
+        //set it to the current item so that the next label can refer to it
+        
+        for label in [label1, label2, label3, label4, label5] {
+            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true //same width as main view
+            label.heightAnchor.constraint(equalToConstant: 88).isActive = true //height = 88
+            
+            if let previous = previous {
+                label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
+            } else {
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+            }
+            
+            previous = label 
+        }
         
     }
 
