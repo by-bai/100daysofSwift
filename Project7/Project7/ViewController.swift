@@ -31,21 +31,18 @@ class ViewController: UITableViewController {
 
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
-            print(petitions)
+//            print(petitions)
             tableView.reloadData()
         }
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        print(petitions.count)
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return petitions.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        print(cell)
         let petition = petitions[indexPath.row]
-        print(petitions)
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
         return cell
