@@ -9,12 +9,24 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
-
-
+    
+    var window: UIWindow?
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        return true
+        print("1")
+        if let tabBarController = window?.rootViewController as? UITabBarController { //rootviewcontroller is UITabBarController
+            print("2")
+            let storyboard = UIStoryboard(name: "Main", bundle: nil) //get reference to Main.storyboard
+            //nil= use current app bundle
+            let vc = storyboard.instantiateViewController(withIdentifier: "NavController") //create view controller, pass in the storyboard ID of the viewcontroller.
+            vc.tabBarItem = UITabBarItem(tabBarSystemItem: .topRated, tag: 1)
+            tabBarController.viewControllers?.append(vc) //add new view controller to tab bar controller's viewControllers array
+            
+            //tldr: above code creates a duplicate ViewController wrapped inside a navigation controller, gives it a new tab bar item and adds it to the list of existing tabs. this lets us use the same class for both tabs w/o having to duplicate things in storyboard
+        
+        }
+        return true 
     }
 
     // MARK: UISceneSession Lifecycle

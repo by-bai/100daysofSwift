@@ -15,15 +15,32 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
 
         // let urlString = "https://api.whitehouse.gov/v1/petitions.json?limit=100"
-        let urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
+        let urlString: String
+        
+        if navigationController?.tabBarItem.tag == 0 {
+            urlString = "https://www.hackingwithswift.com/samples/petitions-1.json"
+        } else {
+            urlString = "https://www.hackingwithswift.com/samples/petitions-2.json"
+        }
 
         if let url = URL(string: urlString) {
             if let data = try? Data(contentsOf: url) {
                 // we're OK to parse!
                 parse(json: data)
                 print("ok")
+                return
             }
         }
+        showError()
+        
+    }
+    
+    func showError() {
+        let ac = UIAlertController(title: "Loading error", message: "There was a problem loading the feed; please check your connectionn and try again.", preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+        
     }
     
     func parse(json: Data) {
@@ -46,6 +63,14 @@ class ViewController: UITableViewController {
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
         return cell
+    }
+    
+    //since DetailViewController isnt a view controller in the storyboard - it's a free-floating class - we don't use instantiateViewController() method to load it. use didSelectRowAt to load the class directly rather than load the user interface from a storyboard.
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailViewController()
+        vc.detailItem = petitions[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
     }
 
 }
