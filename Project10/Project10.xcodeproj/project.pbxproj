@@ -14,6 +14,7 @@
 		BE328D892695F2E900A940D4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE328D882695F2E900A940D4 /* Assets.xcassets */; };
 		BE328D8C2695F2E900A940D4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE328D8A2695F2E900A940D4 /* LaunchScreen.storyboard */; };
 		BE328D952695F67400A940D4 /* PersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE328D942695F67400A940D4 /* PersonCell.swift */; };
+		BED99E7726974F1300F7F3D2 /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED99E7626974F1300F7F3D2 /* Person.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		BE328D8B2695F2E900A940D4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE328D8D2695F2E900A940D4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE328D942695F67400A940D4 /* PersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonCell.swift; sourceTree = "<group>"; };
+		BED99E7626974F1300F7F3D2 /* Person.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				BE328D7F2695F2E100A940D4 /* AppDelegate.swift */,
 				BE328D812695F2E100A940D4 /* SceneDelegate.swift */,
 				BE328D832695F2E100A940D4 /* ViewController.swift */,
+				BED99E7626974F1300F7F3D2 /* Person.swift */,
 				BE328D852695F2E100A940D4 /* Main.storyboard */,
 				BE328D942695F67400A940D4 /* PersonCell.swift */,
 				BE328D882695F2E900A940D4 /* Assets.xcassets */,
@@ -140,6 +143,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BED99E7726974F1300F7F3D2 /* Person.swift in Sources */,
 				BE328D842695F2E100A940D4 /* ViewController.swift in Sources */,
 				BE328D802695F2E100A940D4 /* AppDelegate.swift in Sources */,
 				BE328D952695F67400A940D4 /* PersonCell.swift in Sources */,
@@ -300,7 +304,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bai.Project10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -319,7 +323,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.bai.Project10;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
